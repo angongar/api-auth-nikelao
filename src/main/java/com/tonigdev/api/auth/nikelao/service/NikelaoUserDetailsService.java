@@ -22,7 +22,7 @@ public class NikelaoUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		NikelaoUser user = null;
 		
-		Optional<NikelaoUser> optional = repository.loadUserByUsername(username);
+		Optional<NikelaoUser> optional = repository.findByUsername(username);
 
 		if (optional.isPresent()) {
 			user = optional.get();
@@ -36,7 +36,7 @@ public class NikelaoUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByEmail(String email) throws UsernameNotFoundException {
 		NikelaoUser user = null;
 		
-		Optional<NikelaoUser> optional = repository.loadUserByEmail(email);
+		Optional<NikelaoUser> optional = repository.findByEmail(email);
 
 		if (optional.isPresent()) {
 			user = optional.get();

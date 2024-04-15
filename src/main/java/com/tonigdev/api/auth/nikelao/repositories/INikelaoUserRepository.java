@@ -11,8 +11,8 @@ import com.tonigdev.api.auth.nikelao.model.NikelaoUser;
 @Repository
 public interface INikelaoUserRepository extends JpaRepository<NikelaoUser, Long>{
 	
-	public Optional<NikelaoUser> loadUserByUsername(String username) throws UsernameNotFoundException;
+	public Optional<NikelaoUser> findByUsername(String username) throws UsernameNotFoundException;
 	
-	public Optional<NikelaoUser> loadUserByEmail(String email) throws UsernameNotFoundException;
+	public Optional<NikelaoUser> findByEmail(String email) throws UsernameNotFoundException;
 
 }
