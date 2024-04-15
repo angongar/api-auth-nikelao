@@ -1,5 +1,6 @@
 package com.tonigdev.api.auth.nikelao.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -18,8 +19,9 @@ import lombok.Setter;
 @Entity
 @Table(name="nikelao_role")
 @Getter @Setter @NoArgsConstructor
-public class NikelaoRole {
-	
+public class NikelaoRoles implements Serializable{
+
+	private static final long serialVersionUID = 7400275840890294465L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -29,6 +31,6 @@ public class NikelaoRole {
 	private String name;
 	
 	@ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<NikelaoUser> usuarios;
+	private Set<NikelaoUsers> usuarios;
 
 }

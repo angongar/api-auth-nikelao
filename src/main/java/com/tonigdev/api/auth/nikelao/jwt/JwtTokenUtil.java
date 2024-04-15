@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.tonigdev.api.auth.nikelao.model.NikelaoUser;
+import com.tonigdev.api.auth.nikelao.model.NikelaoUsers;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -34,9 +34,9 @@ public class JwtTokenUtil {
 	}
 	
 	
-	public String generateToken(NikelaoUser user) {
+	public String generateToken(NikelaoUsers user) {
 		return Jwts.builder()
-				.setSubject(String.format("%s,%s", user.getEmail(), user.getUsername()))
+				.setSubject(String.format("%s", user.getUsername()))
 				.setIssuedAt(new Date())
 				.setExpiration(new Date(System.currentTimeMillis() + tokenExpiration * 1000))
 				.signWith(SignatureAlgorithm.HS512, tokenSecret)

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tonigdev.api.auth.nikelao.jwt.EmailPasswordAuthenticationToken;
 import com.tonigdev.api.auth.nikelao.jwt.JwtTokenUtil;
-import com.tonigdev.api.auth.nikelao.model.NikelaoUser;
+import com.tonigdev.api.auth.nikelao.model.NikelaoUsers;
 import com.tonigdev.api.auth.nikelao.request.AuthRequest;
 import com.tonigdev.api.auth.nikelao.response.AuthResponse;
 import com.tonigdev.api.auth.nikelao.service.NikelaoUserDetailsService;
@@ -38,7 +38,7 @@ public class AuthController {
 			
 			authManager.authenticate(new UsernamePasswordAuthenticationToken(username, pass));
 			
-			NikelaoUser user = (NikelaoUser) userService.loadUserByUsername(username);
+			NikelaoUsers user = (NikelaoUsers) userService.loadUserByUsername(username);
 			
 			String token = jwtUtil.generateToken(user);
 			

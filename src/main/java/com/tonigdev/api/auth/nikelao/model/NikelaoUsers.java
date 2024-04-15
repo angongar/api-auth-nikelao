@@ -28,7 +28,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "nikelao_user")
 @Getter @Setter @NoArgsConstructor
-public class NikelaoUser implements UserDetails{
+public class NikelaoUsers implements UserDetails{
 	
 	/**
 	 * 
@@ -40,15 +40,9 @@ public class NikelaoUser implements UserDetails{
 	private Long id;
 	
 	@Column(unique = true, nullable = false)
-	private String email;
-	@Column(unique = true, nullable = false)
 	private String username;
 	@Column(nullable = false)
 	private String pass;
-	private String name;
-	private String surname;
-	private String address;
-	private Long phone;
 	private boolean active;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -57,7 +51,7 @@ public class NikelaoUser implements UserDetails{
 				inverseJoinColumns = @JoinColumn(name="role_id"),
 				foreignKey = @ForeignKey(name="fk_user_of_rol"),
 				inverseForeignKey = @ForeignKey(name="fk_rol_of_user"))
-	private Set<NikelaoRole> roles;
+	private Set<NikelaoRoles> roles;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

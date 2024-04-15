@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.tonigdev.api.auth.nikelao.model.NikelaoUser;
+import com.tonigdev.api.auth.nikelao.model.NikelaoUsers;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -57,12 +57,11 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
 	private String getAccessToken(HttpServletRequest request) {
 		String header = request.getHeader("Authorization");
-		String token = header.split(" ")[1].trim();
-		return token;
+		return header.split(" ")[1].trim();
 	}
 
 	private void setAuthenticationContext(String token, HttpServletRequest request) {
-		NikelaoUser userDetails = getUserDetails(token);
+		NikelaoUsers userDetails = getUserDetails(token);
 
 		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null, null);
 
@@ -71,13 +70,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 		SecurityContextHolder.getContext().setAuthentication(auth);
 	}
 
-	private NikelaoUser getUserDetails(String token) {
-		NikelaoUser userDetails = new NikelaoUser();
+	private NikelaoUsers getUserDetails(String token) {
+		NikelaoUsers userDetails = new NikelaoUsers();
 		String[] jwtSubject = jwtUtil.getSubject(token).split(",");
 
 		userDetails.setId(Long.parseLong(jwtSubject[0]));
-		userDetails.setEmail(jwtSubject[1]);
-		userDetails.setUsername(jwtSubject[2]);
+		userDetails.setUsername(jwtSubject[1]);
 
 		return userDetails;
 	}
