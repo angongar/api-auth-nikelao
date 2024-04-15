@@ -1,3 +1,3 @@
-# API Login Nikelao
+# API Auth Nikelao
 
-Este será el proyecto para una api de login de la aplicación para la peluquería Nikelao.
+Este será el proyecto para una api de autenticación de la aplicación para la peluquería Nikelao.
