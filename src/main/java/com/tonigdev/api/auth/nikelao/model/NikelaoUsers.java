@@ -43,6 +43,7 @@ public class NikelaoUsers implements UserDetails{
 	private String username;
 	@Column(nullable = false)
 	private String pass;
+	@Column(name = "active", nullable = false)
 	private boolean active;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -83,6 +84,13 @@ public class NikelaoUsers implements UserDetails{
 	@Override
 	public boolean isEnabled() {
 		return active;
+	}
+	
+	public void createUser(String username, String pass) {
+		this.username = username;
+		this.pass = pass;
+		this.active = true;
+		this.roles = new HashSet<>();
 	}
 	
 
