@@ -1,8 +1,7 @@
 package com.tonigdev.api.auth.nikelao.jwt;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -35,8 +34,18 @@ public class JwtTokenUtil {
 	
 	
 	public String generateToken(NikelaoUsers user) {
+		Claims claims = Jwts.claims();
+        // Añade los campos como claims
+        claims.put("username", user.getUsername());
+        claims.put("id", user.getId());
+        
+        List<String> authorities = user.getAuthorities().stream()
+                .map(authority -> authority.getAuthority())
+                .toList();
+        claims.put("authorities", authorities);
+		
 		return Jwts.builder()
-				.setSubject(String.format("%s", user.getUsername()))
+				.setClaims(claims)
 				.setIssuedAt(new Date())
 				.setExpiration(new Date(System.currentTimeMillis() + tokenExpiration * 1000))
 				.signWith(SignatureAlgorithm.HS512, tokenSecret)

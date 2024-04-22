@@ -57,7 +57,7 @@ public class NikelaoUsers implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Set<GrantedAuthority> auth = new HashSet<GrantedAuthority>();
-		roles.forEach(r -> auth.add(new SimpleGrantedAuthority(r.getName())));
+		roles.forEach(r -> auth.add(new SimpleGrantedAuthority(r.getCode())));
 		return auth;
 	}
 
